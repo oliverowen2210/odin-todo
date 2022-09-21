@@ -39,11 +39,19 @@ function todo(n, prio, date, desc) {
         return[name, priority, date, description, completed];
     };
 
-    function complete() {
-        completed = true;
+    function update(vals) {
+        name = vals[0];
+        priority = vals[1];
+        date = vals[2];
+        desc = vals[3];
     };
 
-    return {getName, getPriority, getDate, setDesc, getDesc, isComplete, setPriority, getData, complete}
+    function complete() {
+        completed = true;
+        console.log(`${name} completed!`);
+    };
+
+    return {getName, getPriority, getDate, setDesc, getDesc, isComplete, setPriority, getData, update, complete}
 };
 
 

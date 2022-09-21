@@ -18,11 +18,6 @@ const project = function(n, prios) {
         _todos.splice(i, 1);
     };
 
-    const completeTodo = function(i) {
-        _todos[i].complete();
-        console.log(`'${_todos[i].getName()}' completed!`);
-    };
-
     const getTodos = function() {
         for (let i = 0; i < _todos.length; i++) {
             let todo = _todos[i];
@@ -31,7 +26,7 @@ const project = function(n, prios) {
         return _todos;
     };
 
-    return {name, addTodo, removeTodo, completeTodo, getTodos}
+    return {name, addTodo, removeTodo, getTodos};
 };
 
 const priorityHandler = (function() {
@@ -53,8 +48,8 @@ const priorityHandler = (function() {
         return _priorities;
     };
 
-    return { validatePriority, setPriority, getPriorities }
+    return { validatePriority, setPriority, getPriorities };
 })();
 
-export { project }
+export { project };
 

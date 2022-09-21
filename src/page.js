@@ -89,8 +89,8 @@ function init() {
     const editTodo = function() {
         if (!selectedProject) errorHandler.noProjectSelected();
         if (!selectedTodo) errorHandler.noTodoSelected();
-        selectedProject.editTodo(selectedTodo, getInputValues());
-    }
+        selectedTodo.update(getInputValues());
+    };
 
     const selectTodo = function() {
         if (todoList.value == 'new') {
@@ -108,11 +108,13 @@ function init() {
 
     const setTodoButton = function(state) {
         if (state == 'new') {
-            createTodoButton.classList.add('new');
-            createTodoButton.classList.remove('edit');
+            todoButton.classList.add('new');
+            todoButton.classList.remove('edit');
+            todoButton.textContent = 'New task';
         } else if (state == 'edit') {
-            createTodoButton.classList.add('edit');
-            createTodoButton.classList.remove('new');
+            todoButton.classList.add('edit');
+            todoButton.classList.remove('new');
+            todoButton.textContent = 'Update task';
         } else errorHandler.invalidTodoButtonState;
     };
     
@@ -211,19 +213,17 @@ function init() {
     const descInput = document.createElement('textarea');
     descInput.placeholder = 'Task description (optional)'
 
-    const createTodoButton = document.createElement('button');
-    createTodoButton.addEventListener('click', () => {
-        if (createTodoButton.classList.contains('new')) createTodo();
+    const todoButton = document.createElement('button');
+    todoButton.addEventListener('click', () => {
+        if (todoButton.classList.contains('new')) createTodo();
         else editTodo();
     });
-    createTodoButton.textContent = 'create todo';
-    createTodoButton.classList.add('new');
+    setTodoButton('new');
 
     const deleteTodoButton = document.createElement('button');
     deleteTodoButton.addEventListener('click', () => {
-        deleteTodo();
-        wipeTodoList();
-        populateTodoList();
+        if (!selectedTodo) errorHandler.noTodoSelected();
+        resetModal();
     });
     deleteTodoButton.textContent = 'Delete task'
 
@@ -234,11 +234,15 @@ function init() {
     todoList.append(newTodoOption);
 
     todoList.addEventListener('change', () => {
+        if (todoList.value == 'new') {
+            resetModal();
+            return;
+        };
         selectTodo();
     });
 
     projectCreationModal.append(projectCreateDiv, projectList, todoNameInput, priorityInput, 
-                                dateInput, descInput, createTodoButton, todoList, deleteTodoButton);
+                                dateInput, descInput, todoButton, todoList, deleteTodoButton);
 
     page.append(projectCreationModal);
 }
