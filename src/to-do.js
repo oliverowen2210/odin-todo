@@ -27,53 +27,23 @@ function todo(n, prio, date, desc) {
         return description;
     };
 
-    function getStatus() {
+    function isComplete() {
         return completed;
     };
 
     function setPriority(prio) {
-        if (todoController.validatePriority(prio)) {
-            this.priority = prio;
-        };
-    };
-    
-
-    function changeStatus() {
-        completed = !completed;
+        priority = prio;
     };
 
-    return {getName, getPrio, getDate, setDesc, getDesc, getStatus, setPriority, changeStatus }
-};
-
-const todoController = (function() {
-    const priorities = ['low', 'medium', 'high']
-    function validatePriority(prio) {
-        if (priorities.indexOf(prio) == -1) {
-            todoError.priorityError();
-        } else return true;
+    function complete() {
+        completed = true;
     };
 
-    function getPriorities() {
-        return priorities;
-    };
-
-    return { validatePriority, getPriorities };
-})();
-
-const todoError = (function() {
-    function priorityError() {
-        throw `Invalid priority value! Accepted values are: ${todoController.getPriorities()}`;
-    };
-
-    return { priorityError };
-})();
-
-function todoFactory(name, prio, date, desc='') {
-    if (todoController.validatePriority(prio)) {
-        return (todo(name, prio, date, desc));
-    };
-
+    return {getName, getPrio, getDate, setDesc, getDesc, isComplete, setPriority, complete}
 };
 
 
-export { todo, todoFactory };
+
+
+
+export default todo;
