@@ -1,4 +1,6 @@
 import todo from './to-do.js';
+import { errorHandler } from './errors.js';
+
 
 const project = function(n, prios) {
     let name = n;
@@ -24,7 +26,7 @@ const project = function(n, prios) {
     const getTodos = function() {
         for (let i = 0; i < _todos.length; i++) {
             let todo = _todos[i];
-            console.log(`${i+1}. ${todo.getName()}, priority: ${todo.getPrio()}, due: ${todo.getDate()}, completed: ${todo.isComplete()}`);
+            console.log(`${i+1}. ${todo.getName()}, priority: ${todo.getPriority()}, due: ${todo.getDate()}, completed: ${todo.isComplete()}`);
         };
         return _todos;
     };
@@ -36,6 +38,7 @@ const priorityHandler = (function() {
     let _priorities = ['low', 'medium', 'high'];
     function validatePriority(prio) {
         if (_priorities.indexOf(prio) == -1) {
+            console.log(`Accepted values are: ${priorityHandler.getPriorities()}`);
             errorHandler.priorityError();
         } else return true;
     };
@@ -53,15 +56,5 @@ const priorityHandler = (function() {
     return { validatePriority, setPriority, getPriorities }
 })();
 
-const errorHandler = (function() {
-    function priorityError() {
-        throw `Invalid priority value! Accepted values are: ${priorityHandler.getPriorities()}`;
-    };
-
-    return { priorityError };
-})();
-
-priorityHandler.prototype = project;
-errorHandler.prototype = project;
 export { project }
 

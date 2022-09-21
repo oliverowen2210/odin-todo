@@ -10,7 +10,7 @@ function todo(n, prio, date, desc) {
         return name;
     };
 
-    function getPrio() {
+    function getPriority() {
         return priority;
     };
 
@@ -35,11 +35,15 @@ function todo(n, prio, date, desc) {
         priority = prio;
     };
 
+    function getData() {
+        return[name, priority, date, description, completed];
+    };
+
     function complete() {
         completed = true;
     };
 
-    return {getName, getPrio, getDate, setDesc, getDesc, isComplete, setPriority, complete}
+    return {getName, getPriority, getDate, setDesc, getDesc, isComplete, setPriority, getData, complete}
 };
 
 
