@@ -1,19 +1,142 @@
 body, html {
     margin: 0;
     height: 100%;
+    --main-background: rgb(221, 221, 221);
+    --background: white;
+    --background-hover: rgb(245, 245, 245);
+    --border: lightskyblue;
+    --border-hover: rgb(0, 153, 255);
+    background-color: var(--main-background);
+    font-family: "Roboto", sans-serif;
 }
+
+#content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    background-color: white;
+    border: 2px solid var(--border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 15vh;
+}
+
+header h1 {
+    position: relative;
+}
+
+header button {
+    position: absolute;
+    right: 0;
+}
+
+.project-header h1::after {
+    content: "✏️";
+    position: absolute;
+    right: -35%;
+    bottom: -3%
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 16%;
+    grid-auto-rows: 1fr;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: flex-start;
+    height: 75vh;
+    padding: 5%;
+}
+
+.project {
+    display: grid;
+    grid-template-rows: 3fr 1fr 1fr;
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    justify-content: center;
+    word-wrap: break-word;
+    border-radius: 2rem;
+    padding: 4%;
+    background-color: white;
+    border: 4px solid var(--border);
+    width: 80%;
+    height: 100%;
+    font-weight: bold;
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.project:hover {
+    background-color: var(--background-hover);
+    border: 4px solid var(--border-hover);
+    box-shadow: 0px 0px 5px lightgray;
+}
+
+.project-name {
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+#new-project {
+    position: absolute;
+    bottom: 2%;
+    left: 1%;
+    line-height: 60px;
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--background);
+    border: 4px solid var(--border);
+    border-radius: 100%;
+    font-size: 5rem;
+    cursor: pointer;
+}
+
+#new-project:hover {
+    background-color: var(--background-hover);
+    border: 4px solid var(--border-hover);
+}
+
+.grid-header #back-button {
+    display: none;
+}
+
+#back-button {
+    position: absolute;
+    top: 25%;
+    left: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 
 #project-creation {
     display: flex;
     flex-direction: column;
-    height: 50%;
+    height: 75%;
+    width: 50%;
     align-items: center;
+    border-radius: 1rem;
     gap: 5%;
+    background-color: var(--background);
+    padding: 3%;
 }
+
 
 #project-creation div {
     display: flex;
-    width: 25%;
+    width: 45%;
 }
 
 #project-creation div input {
@@ -21,18 +144,38 @@ body, html {
 }
 
 #project-creation div button {
-    width: 25%;
+    width: 45%;
 }
 
 #project-creation input, #project-creation select {
     height: 10vh;
-    width: 25%;
+    width: 45%;
     margin: 0;
     padding: 0;
 }
 
 #project-creation textarea {
-    width: 25%;
+    width: 45%;
     height: 25%;
 }
 
+@media only screen and (max-width: 800px) {
+    #back-button {
+        top: 3%;
+    }
+
+    .project {
+        font-size: calc(4vw);
+        width:60vw;
+    }
+
+    main {
+        grid-template-columns: 1fr;
+        gap: 35%;
+        padding: 10% 0%;
+    }
+
+    #new-project {
+        bottom: 2%;
+    }
+}

@@ -54,8 +54,4 @@ function todo(n, prio, date, desc) {
     return {getName, getPriority, getDate, setDesc, getDesc, isComplete, setPriority, getData, update, complete}
 };
 
-
-
-
-
 export default todo;

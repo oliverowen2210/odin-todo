@@ -4,21 +4,24 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  entry: {
-    index: './src/index.js'
-  },
+  entry: './src/index.js',
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Dev',
+      template: './src/index.html',
     })
   ],
   output: {
-    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true,
+    filename: 'index_bundle.js',
+    clean: true
   },
   module: {
     rules: [
+        {
+            test: /\.html$/i,
+            use: ['html-loader'],
+        },
         {
             test: /\.css$/i,
             use: ['style-loader', 'css-loader'],

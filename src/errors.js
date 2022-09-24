@@ -1,4 +1,4 @@
-const errorHandler = (function() {
+const errors = (function() {
     const noProjectSelected = function() {
         throw 'No project has been selected!';
     };
@@ -15,10 +15,11 @@ const errorHandler = (function() {
         throw 'Invalid priority value!';
     };
 
-    const invalidTodoButtonState = function() {
-        throw 'Invalid todo button class! Must be "new" or "Edit"';
-    }
-    return {noProjectSelected, noTodoSelected, blankProjectName, priorityError}
+    const invalidGridMode = function() {
+        throw 'Invalid grid mode! Must be "project" or "task"';
+    };
+
+    return {noProjectSelected, noTodoSelected, blankProjectName, priorityError, invalidGridMode}
 })();
 
-export {errorHandler}
+export {errors}

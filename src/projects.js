@@ -1,10 +1,19 @@
 import todo from './to-do.js';
-import { errorHandler } from './errors.js';
+import { errors } from './errors.js';
 
 
 const project = function(n, prios) {
-    let name = n;
+    let _name = n;
     let _todos = [];
+
+    const getName = function() {
+        return _name;
+    };
+
+    const setName = function(newName) {
+        _name = newName;
+        return(`Name set to ${newName}`);
+    };
 
     const addTodo = function(name, priority, date, desc='') {
     if (priorityHandler.validatePriority(priority)) {
@@ -21,12 +30,19 @@ const project = function(n, prios) {
     const getTodos = function() {
         for (let i = 0; i < _todos.length; i++) {
             let todo = _todos[i];
-            console.log(`${i+1}. ${todo.getName()}, priority: ${todo.getPriority()}, due: ${todo.getDate()}, completed: ${todo.isComplete()}`);
         };
         return _todos;
     };
 
-    return {name, addTodo, removeTodo, getTodos};
+    const getCompleted = function() {
+        let completed = [];
+        for (let i = 0; i < _todos.length; i++) {
+            if (_todos[i].isComplete()) completed.push(_todos[i]);
+        };
+        return completed
+    };
+
+    return {getName, setName, addTodo, removeTodo, getTodos, getCompleted};
 };
 
 const priorityHandler = (function() {
@@ -34,7 +50,7 @@ const priorityHandler = (function() {
     function validatePriority(prio) {
         if (_priorities.indexOf(prio) == -1) {
             console.log(`Accepted values are: ${priorityHandler.getPriorities()}`);
-            errorHandler.priorityError();
+            errors.priorityError();
         } else return true;
     };
     
@@ -52,4 +68,3 @@ const priorityHandler = (function() {
 })();
 
 export { project };
-
